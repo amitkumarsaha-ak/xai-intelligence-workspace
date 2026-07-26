@@ -1,26 +1,319 @@
 @import "tailwindcss";
 
+/* =========================================================
+   THEME
+========================================================= */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #050816;
+  --surface: #0b1020;
+  --card: #111827;
+  --border: #1e293b;
+
+  --primary: #5b8cff;
+  --secondary: #4fd1ff;
+  --purple: #7c5cff;
+
+  --text: #f8fafc;
+  --muted: #94a3b8;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* =========================================================
+   BASE
+========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
+  margin: 0;
+  padding: 0;
+
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+
+  color: var(--text);
+
+  font-family:
+    var(--font-inter),
+    Inter,
+    system-ui,
+    sans-serif;
+
+  overflow-x: hidden;
+
+  text-rendering: optimizeLegibility;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =========================================================
+   TYPOGRAPHY
+========================================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+canvas {
+  display: block;
+}
+
+/* =========================================================
+   SELECTION
+========================================================= */
+
+::selection {
+  background: rgba(91, 140, 255, 0.35);
+  color: white;
+}
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #070b18;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    to bottom,
+    #5b8cff,
+    #7c5cff
+  );
+
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    to bottom,
+    #72a2ff,
+    #9173ff
+  );
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container-xai {
+  width: 100%;
+
+  max-width: 1440px;
+
+  margin-inline: auto;
+
+  padding-inline: 24px;
+}
+
+@media (min-width: 768px) {
+  .container-xai {
+    padding-inline: 40px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-xai {
+    padding-inline: 64px;
+  }
+}
+
+/* =========================================================
+   GRID BACKGROUND
+========================================================= */
+
+.grid-bg {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.035;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,.08) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.08) 1px,
+      transparent 1px
+    );
+
+  background-size: 48px 48px;
+}
+
+/* =========================================================
+   GLASS
+========================================================= */
+
+.glass {
+  background: rgba(11,16,32,.75);
+
+  backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255,255,255,.06);
+}
+
+.glass-card {
+  background: rgba(17,24,39,.75);
+
+  backdrop-filter: blur(22px);
+
+  border: 1px solid #1e293b;
+
+  border-radius: 24px;
+}
+
+/* =========================================================
+   GLOW
+========================================================= */
+
+.glow-blue {
+  box-shadow:
+    0 0 20px rgba(91,140,255,.18),
+    0 0 60px rgba(91,140,255,.12);
+}
+
+.glow-purple {
+  box-shadow:
+    0 0 20px rgba(124,92,255,.18),
+    0 0 60px rgba(124,92,255,.12);
+}
+
+/* =========================================================
+   GRADIENT TEXT
+========================================================= */
+
+.gradient-text {
+  background:
+    linear-gradient(
+      90deg,
+      #4fd1ff,
+      #5b8cff,
+      #7c5cff
+    );
+
+  -webkit-background-clip: text;
+
+  background-clip: text;
+
+  color: transparent;
+}
+
+/* =========================================================
+   BUTTON TRANSITIONS
+========================================================= */
+
+button {
+  transition:
+    transform .3s ease,
+    background .3s ease,
+    border-color .3s ease,
+    box-shadow .3s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   FADE ANIMATION
+========================================================= */
+
+@keyframes float {
+
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* =========================================================
+   SPIN
+========================================================= */
+
+@keyframes slow-spin {
+
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: slow-spin 20s linear infinite;
+}
+
+/* =========================================================
+   PULSE GLOW
+========================================================= */
+
+@keyframes pulseGlow {
+
+  0% {
+    opacity: .45;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: .45;
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
 }
